@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fafafa">
   <title>ahdevloper — Software Engineer &amp; Full-Stack Developer</title>
   <meta name="description"
     content="ahdevloper — مهندس برمجيات ومطور Full-Stack. أبني منصات ويب، أنظمة، تطبيقات وخدمات رقمية.">
@@ -12,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"
     rel="stylesheet">
 
   <script>
@@ -21,69 +22,89 @@
       const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       const theme = savedTheme || (systemDark ? "dark" : "light");
       document.documentElement.setAttribute("data-theme", theme);
+
+      let lang = null;
+      try { lang = localStorage.getItem("lang"); } catch (e) { }
+      if (lang !== "ar" && lang !== "en") {
+        const prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"];
+        lang = "en";
+        for (const l of prefs) {
+          const code = String(l).toLowerCase().slice(0, 2);
+          if (code === "ar" || code === "en") { lang = code; break; }
+        }
+      }
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     })();
   </script>
 
   <style>
     :root {
-      --ink: #0b0b0c;
-      --ink-soft: #232326;
-      --paper: #faf9f6;
-      --paper-2: #f1efe9;
-      --card: #ffffff;
-      --line: #e4e1d8;
-      --line-strong: #d8d4c6;
-      --muted: #6b6a64;
-      --accent: #f5a300;
-      --accent-deep: #a86a00;
-      --accent-ink: #0b0b0c;
-      --radius: 14px;
-      --maxw: 1120px;
-      --font-display: 'Space Grotesk', 'IBM Plex Sans Arabic', sans-serif;
-      --font-body: 'IBM Plex Sans Arabic', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
 
-      --nav-bg: rgba(250, 249, 246, 0.85);
-      --nav-bg-scrolled: rgba(250, 249, 246, 0.92);
-      --nav-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.06);
-      --social-bg-hover: #fff7e6;
+      --ink: #171717;
+      --ink-soft: #444444;
+      --paper: #fafafa;
+      --paper-2: #f5f5f5;
+      --card: #ffffff;
+      --line: #eaeaea;
+      --line-strong: #e0e0e0;
+      --muted: #4d4d4d;
+      --mute: #888888;
+      --accent: #171717;
+      --accent-deep: #171717;
+      --accent-ink: #ffffff;
+      --link: #0070f3;
+      --radius: 6px;
+      --maxw: 1200px;
+      --font-stack: 'Geist', 'IBM Plex Sans Arabic', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+      --font-display: var(--font-stack);
+      --font-body: var(--font-stack);
+      --font-mono: var(--font-stack);
+      --shadow-card: rgba(0, 0, 0, 0.08) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 2px 0, #fafafa 0 0 0 1px inset;
+
+      --nav-bg: rgba(250, 250, 250, 0.85);
+      --nav-bg-scrolled: rgba(250, 250, 250, 0.92);
+      --nav-shadow: none;
+      --social-bg-hover: #fafafa;
       --social-icon-filter: none;
-      --project-visual-bg: radial-gradient(120% 140% at 15% 0%, rgba(245, 163, 0, 0.16), transparent 60%), #0b0b0c;
-      --cv-bg: #0b0b0c;
-      --cv-text: #faf9f6;
-      --cv-muted: #b8b7b3;
+      --project-visual-bg: #fafafa;
+      --cv-bg: #171717;
+      --cv-text: #ffffff;
+      --cv-muted: #a1a1a1;
+      --cv-border: transparent;
     }
 
     [data-theme="dark"] {
-      --ink: #f4f3ef;
-      --ink-soft: #dcdad2;
-      --paper: #0e0e0f;
-      --paper-2: #141416;
-      --card: #18181b;
-      --line: #27272a;
-      --line-strong: #3f3f46;
-      --muted: #a1a09a;
-      --accent: #f5a300;
-      --accent-deep: #ffb733;
-      --accent-ink: #0b0b0c;
+      --ink: #ededed;
+      --ink-soft: #d4d4d4;
+      --paper: #0a0a0a;
+      --paper-2: #111111;
+      --card: #111111;
+      --line: #262626;
+      --line-strong: #333333;
+      --muted: #a1a1a1;
+      --mute: #8f8f8f;
+      --accent: #ededed;
+      --accent-deep: #ededed;
+      --accent-ink: #0a0a0a;
+      --link: #52a8ff;
+      --shadow-card: rgba(255, 255, 255, 0.1) 0 0 0 1px, rgba(0, 0, 0, 0.4) 0 2px 2px 0;
 
-      --nav-bg: rgba(14, 14, 15, 0.85);
-      --nav-bg-scrolled: rgba(14, 14, 15, 0.94);
-      --nav-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.4);
-      --social-bg-hover: #262118;
+      --nav-bg: rgba(10, 10, 10, 0.85);
+      --nav-bg-scrolled: rgba(10, 10, 10, 0.92);
+      --social-bg-hover: #1a1a1a;
       --social-icon-filter: invert(1) brightness(1.2);
-      --project-visual-bg: radial-gradient(120% 140% at 15% 0%, rgba(245, 163, 0, 0.22), transparent 60%), #121214;
-      --cv-bg: #18181b;
-      --cv-text: #f4f3ef;
-      --cv-muted: #a1a09a;
+      --project-visual-bg: #0a0a0a;
+      --cv-bg: #111111;
+      --cv-text: #ededed;
+      --cv-muted: #a1a1a1;
+      --cv-border: #262626;
     }
 
-    /* ---------- Global Theme Smooth Transition ---------- */
     body,
     header.site-nav,
     .project-card,
     .skill-chip,
-    .cv-strip,
     .social-row a,
     .contact-social a,
     .btn,
@@ -171,7 +192,6 @@
       font-weight: 700;
     }
 
-    /* ---------- Scroll Progress Bar ---------- */
     .scroll-progress {
       position: fixed;
       top: 0;
@@ -186,7 +206,6 @@
       transition: transform 0.08s linear;
     }
 
-    /* ---------- Focus visibility ---------- */
     a:focus-visible,
     button:focus-visible {
       outline: 2px solid var(--accent);
@@ -194,7 +213,6 @@
       border-radius: 4px;
     }
 
-    /* ---------- Nav ---------- */
     header.site-nav {
       position: fixed;
       top: 0;
@@ -220,7 +238,6 @@
       gap: 12px;
     }
 
-    /* ---------- Theme Toggle Button ---------- */
     .theme-toggle {
       background: var(--paper-2);
       border: 1px solid var(--line-strong);
@@ -323,7 +340,6 @@
       transform: translateY(-2px);
     }
 
-    /* ---------- Hero Avatar Badge ---------- */
     .hero-avatar {
       width: 108px;
       height: 108px;
@@ -422,7 +438,6 @@
       }
     }
 
-    /* ---------- Hero Animations ---------- */
     .hero {
       min-height: 92vh;
       display: flex;
@@ -676,7 +691,6 @@
       }
     }
 
-    /* ---------- Responsive Mobile Styles ---------- */
     @media (max-width: 820px) {
       .wrap {
         padding-inline: 20px;
@@ -806,7 +820,6 @@
       }
     }
 
-    /* ---------- Section shell & Reveal ---------- */
     section {
       padding: 100px 0;
       position: relative;
@@ -870,7 +883,6 @@
       }
     }
 
-    /* ---------- About ---------- */
     .about-body {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -927,13 +939,6 @@
       }
     }
 
-    /* ---------- Skills ---------- */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-    }
-
     .skill-chip {
       display: flex;
       align-items: center;
@@ -971,37 +976,6 @@
       font-weight: 500;
     }
 
-    /* ---------- Skill Categories ---------- */
-    .skills-categories {
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
-    }
-
-    .skill-cat {
-      /* intentionally no border — stays minimal */
-    }
-
-    .skill-cat-label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 16px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .skill-cat-label::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--line);
-    }
-
-    /* Text-only chips for non-icon skills */
     .skill-chip.text-chip {
       gap: 8px;
     }
@@ -1022,11 +996,6 @@
     .skill-chip.text-chip span {
       font-size: 13px;
       line-height: 1.3;
-    }
-
-    /* ---------- Projects ---------- */
-    .project-group+.project-group {
-      margin-top: 56px;
     }
 
     .group-label {
@@ -1208,52 +1177,6 @@
       color: var(--accent-deep);
     }
 
-    /* ---------- CV strip ---------- */
-    .cv-strip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      background: var(--ink);
-      color: var(--paper);
-      border-radius: 20px;
-      padding: 36px 40px;
-      flex-wrap: wrap;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
-      border: 1px solid transparent;
-    }
-
-    .cv-strip:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 42px -20px rgba(0, 0, 0, 0.45);
-      border-color: rgba(245, 163, 0, 0.3);
-    }
-
-    .cv-strip h3 {
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 600;
-    }
-
-    .cv-strip p {
-      color: #b8b7b3;
-      font-size: 14px;
-      margin-top: 6px;
-      max-width: 44ch;
-    }
-
-    .cv-strip .btn-primary {
-      background: var(--accent);
-      color: var(--accent-ink);
-    }
-
-    .cv-strip .btn-primary:hover {
-      background: #fff;
-    }
-
-    /* ---------- Contact ---------- */
     .contact-inner {
       text-align: center;
       max-width: 700px;
@@ -1282,7 +1205,6 @@
       gap: 12px;
     }
 
-    /* ---------- Footer ---------- */
     footer {
       border-top: 1px solid var(--line);
       padding: 34px 0;
@@ -1333,7 +1255,6 @@
       transform: translateY(-2px);
     }
 
-    /* ---------- Mobile & Accessibility Controls ---------- */
     @media (hover: none) {
       .project-card:hover {
         transform: none !important;
@@ -1384,7 +1305,6 @@
       }
     }
 
-    /* ---------- Floating WhatsApp Button ---------- */
     .whatsapp-float {
       position: fixed;
       bottom: 26px;
@@ -1495,6 +1415,153 @@
         display: none;
       }
     }
+
+    ::selection { background: #171717; color: #f2f2f2; }
+    [data-theme="dark"] ::selection { background: #ededed; color: #0a0a0a; }
+    body { line-height: 1.6; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 6px; }
+    .scroll-progress { background: var(--ink); height: 2px; }
+
+    .eyebrow { font-size: 13px; color: var(--mute); letter-spacing: 0; }
+    .eyebrow::before { color: var(--mute); font-weight: 500; }
+    .group-label { color: var(--mute); text-transform: none; letter-spacing: 0; font-size: 13px; }
+
+    .nav-inner { min-height: 64px; padding: 8px 24px; }
+    .logo { letter-spacing: -0.02em; font-size: 16px; }
+    .logo span { color: inherit; }
+    .logo:hover span { transform: none; }
+    .logo-img { border: 1px solid var(--line); box-shadow: none; }
+    .logo:hover .logo-img { transform: none; box-shadow: none; }
+    nav.links { gap: 4px; }
+    nav.links a { padding: 6px 12px; border-radius: 9999px; }
+    nav.links a::after { display: none; }
+    nav.links a:hover, nav.links a.active { background: var(--line); color: var(--ink); }
+    .nav-cta { position: relative; display: inline-flex; align-items: center; height: 28px; padding: 0 10px; font-size: 14px; font-weight: 500; border: 0; border-radius: 6px; background: var(--ink); color: var(--paper); }
+    .nav-cta::after { content: ""; position: absolute; inset: -8px -4px; }
+    .nav-cta:hover { background: var(--ink); color: var(--paper); opacity: .85; transform: none; box-shadow: none; }
+    .theme-toggle { width: 28px; height: 28px; border-radius: 6px; background: var(--card); border: 1px solid var(--line); }
+    .theme-toggle::after { content: ""; position: absolute; inset: -8px; }
+    .theme-toggle svg { width: 15px; height: 15px; }
+    .theme-toggle:hover { border-color: var(--line-strong); color: var(--ink); transform: none; }
+
+    .hero { isolation: isolate; }
+    .hero::before { background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 25% 100%; border-inline: 1px solid var(--line); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 60%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 60%, transparent); opacity: .7; z-index: -1; }
+    .hero::after { content: ""; position: absolute; z-index: -1; pointer-events: none; left: 50%; bottom: 0; width: 100vw; height: 75%; transform: translateX(-50%); background: radial-gradient(ellipse 55% 85% at 50% 100%, #ff4d4d 0%, #f9a825 38%, #50e3c2 68%, transparent 100%); opacity: .5; filter: blur(36px); -webkit-mask-image: linear-gradient(to top, #000 40%, transparent); mask-image: linear-gradient(to top, #000 40%, transparent); }
+    [data-theme="dark"] .hero::after { opacity: .28; }
+    .hero-name { font-weight: 600; font-size: clamp(36px, 6vw, 48px); line-height: 1; letter-spacing: -0.0475em; }
+    .cursor { background: var(--ink); }
+    .hero-role { font-size: 14px; color: var(--muted); background: var(--card); border: 0; box-shadow: 0 0 0 1px var(--line); border-radius: 9999px; padding: 4px 12px; margin-top: 20px; }
+    .hero-desc { font-size: 18px; line-height: 1.7; color: var(--muted); }
+    .hero-hint { color: var(--mute); }
+    .hero-avatar { padding: 3px; background: var(--card); box-shadow: var(--shadow-card); }
+    .hero-avatar:hover { transform: none; box-shadow: var(--shadow-card); }
+    .social-row a, .contact-social a { border-radius: 6px; border: 1px solid var(--line); background: var(--card); }
+    .social-row a:hover { border-color: var(--line-strong); background: var(--paper-2); transform: none; box-shadow: none; }
+
+    .btn { border-radius: 9999px; font-size: 16px; font-weight: 500; min-height: 48px; padding: 0 24px; justify-content: center; }
+    .btn-primary { background: var(--ink); color: var(--paper); }
+    .btn-primary:hover { background: var(--ink); color: var(--paper); opacity: .85; transform: none; box-shadow: none; }
+    .btn-ghost { background: var(--card); border: 1px solid var(--line); color: var(--ink); }
+    .btn-ghost:hover { background: var(--paper-2); border-color: var(--line-strong); transform: none; box-shadow: none; }
+    .btn-primary:hover svg, .btn-ghost:hover svg { transform: none; }
+
+    section { padding: 96px 0; }
+    .section-title { font-weight: 600; font-size: clamp(26px, 4vw, 32px); line-height: 1.3; letter-spacing: 0; }
+    .section-title .accent-dot { color: var(--ink); }
+    .contact-inner h2 { font-weight: 600; font-size: clamp(28px, 5vw, 40px); letter-spacing: 0; }
+    .about-text p { font-size: 18px; color: var(--muted); }
+    .about-facts span:first-child { font-family: var(--font-body); color: var(--mute); }
+    .about-facts div:hover { transform: none; padding-inline: 0; background-color: transparent; }
+
+    .skill-chip, .project-card { border: 0; border-radius: 6px; box-shadow: var(--shadow-card); }
+    .skill-chip:hover { transform: none; background-color: var(--card); box-shadow: 0 0 0 1px var(--line-strong), 0 2px 2px rgba(0, 0, 0, .04); }
+    .skill-chip:hover img, .skill-chip.text-chip:hover .chip-dot { transform: none; }
+    .skill-chip.text-chip .chip-dot { background: var(--mute); }
+    .project-card { transform-style: flat; }
+    .project-card:hover { transform: none; border-color: transparent; box-shadow: 0 0 0 1px var(--line-strong), 0 2px 2px rgba(0, 0, 0, .04); }
+    .project-visual { height: 120px; background: var(--project-visual-bg); border-bottom: 1px solid var(--line); }
+    .project-visual::before { background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 24px 24px; opacity: .8; -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%); mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%); }
+    .project-card:hover .project-visual::before { opacity: 1; }
+    .project-mono-icon { border: 0; border-radius: 6px; background: var(--card); box-shadow: var(--shadow-card); }
+    .project-mono-icon svg, .project-card:hover .project-mono-icon svg { stroke: var(--ink); transform: none; }
+    .project-card:hover .project-mono-icon { transform: none; background: var(--card); box-shadow: var(--shadow-card); border-color: transparent; }
+    .project-body { padding: 16px; }
+    .project-type { color: var(--mute); text-transform: none; letter-spacing: 0; font-size: 12px; }
+    .project-name { font-weight: 600; font-size: 18px; letter-spacing: 0; }
+    .project-desc { font-size: 14px; }
+    .project-card:hover .project-link, .project-link:hover { color: var(--link); }
+
+    .footer-links a:hover { color: var(--ink); transform: none; }
+    .to-top { border-radius: 6px; border-color: var(--line); }
+    .to-top:hover { border-color: var(--line-strong); color: var(--ink); transform: none; }
+
+    .skills-shell { background: var(--card); border-radius: 6px; box-shadow: var(--shadow-card); overflow: hidden; }
+    .skills-bar { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+    .skills-tabs { display: flex; gap: 4px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+    .skills-tabs::-webkit-scrollbar { display: none; }
+    .skills-tab { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font: 500 13px/1 var(--font-body); cursor: pointer; white-space: nowrap; transition: background-color .2s ease, color .2s ease; }
+    .skills-tab:hover { background: var(--paper-2); color: var(--ink); }
+    .skills-tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+    .skills-tab .count { font-size: 11px; opacity: .6; font-variant-numeric: tabular-nums; }
+    .skills-search { position: relative; flex: 0 0 200px; display: block; }
+    .skills-search svg { position: absolute; inset-inline-start: 9px; top: 50%; width: 14px; height: 14px; transform: translateY(-50%); color: var(--mute); pointer-events: none; }
+    .skills-search input { width: 100%; height: 28px; padding: 0 10px; padding-inline-start: 30px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); font: 400 13px var(--font-body); transition: border-color .2s ease; }
+    .skills-search input::placeholder { color: var(--mute); }
+    .skills-search input:hover { border-color: var(--line-strong); }
+    .skills-search input:focus-visible { outline: 2px solid var(--link); outline-offset: 1px; border-color: transparent; }
+    .skills-panel { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 8px; padding: 16px; min-height: 92px; }
+    .skills-panel .skill-chip { gap: 8px; padding: 6px 10px; background: var(--paper); border: 1px solid var(--line); box-shadow: none; animation: chipIn .3s ease both; animation-delay: calc(var(--i, 0) * 16ms); }
+    .skills-panel .skill-chip:hover { background: var(--card); border-color: var(--line-strong); box-shadow: none; }
+    .skills-panel .skill-chip img { width: 16px; height: 16px; }
+    .skills-panel .skill-chip span { font-size: 13px; line-height: 1.3; }
+    .skills-panel .chip-cat { font-size: 11px; color: var(--mute); }
+    .skills-empty { width: 100%; padding: 24px 0; text-align: center; font-size: 14px; color: var(--mute); }
+    @keyframes chipIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    @media (max-width: 640px) { .skills-search { flex: 1 1 100%; } .skills-panel { padding: 12px; } }
+
+    .lang-toggle { position: relative; height: 28px; min-width: 36px; padding: 0 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--ink); font: 500 12px/1 var(--font-body); cursor: pointer; transition: border-color .2s ease; }
+    .lang-toggle::after { content: ""; position: absolute; inset: -8px -4px; }
+    .lang-toggle:hover { border-color: var(--line-strong); }
+    html[dir="ltr"] .eyebrow { justify-content: flex-start; }
+    html[dir="ltr"] .scroll-progress { transform-origin: 0 50%; }
+    html[dir="ltr"] .project-card:hover .project-link svg { transform: translate(4px, -2px); }
+    html[lang="en"] .section-title, html[lang="en"] .contact-inner h2 { letter-spacing: -0.035em; }
+    html[lang="en"] .project-name { letter-spacing: -0.02em; }
+    section { padding: 120px 0; }
+    .section-head { max-width: none; margin-bottom: 56px; }
+    .section-title { font-size: clamp(30px, 4.5vw, 44px); }
+    .hero-name { font-size: clamp(44px, 7.5vw, 72px); }
+    .hero-desc { max-width: 480px; margin-top: 24px; }
+    .hero-stats { display: flex; gap: 40px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero-stats div { display: flex; flex-direction: column; gap: 4px; }
+    .hero-stats strong { font-size: 32px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+    .hero-stats span { font-size: 13px; color: var(--mute); }
+    .about-body { grid-template-columns: 1.5fr 1fr; gap: 80px; align-items: center; }
+    .about-text p { max-width: none; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.55; font-weight: 500; color: var(--ink); }
+    html[lang="en"] .about-text p { letter-spacing: -0.025em; }
+    .about-facts { border-top: 0; background: var(--card); box-shadow: var(--shadow-card); border-radius: 6px; padding: 4px 20px; }
+    .about-facts div:last-child { border-bottom: 0; }
+    .about-facts span:last-child { color: var(--ink); }
+    #skills { background: var(--card); border-bottom: 1px solid var(--line); }
+    .skills-tab[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .proj-tabs { margin-bottom: 24px; flex: none; }
+    .project-grid { gap: 16px; }
+    .project-card { animation: chipIn .35s ease both; animation-delay: calc(var(--stagger, 0) * 40ms); }
+    .project-visual { height: 88px; }
+    .project-body { padding: 20px; gap: 6px; }
+    .project-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .project-link { margin-top: 12px; }
+    #contact { background: var(--cv-bg); color: var(--cv-text); border-top: 0; }
+    #contact .btn-primary { background: #ffffff; color: #171717; }
+    #contact .btn-primary:hover { background: #ffffff; color: #171717; opacity: .88; }
+    #contact .btn-ghost { background: transparent; color: #ffffff; border-color: rgba(255, 255, 255, .2); }
+    #contact .btn-ghost:hover { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .4); }
+    #contact .contact-social a { background: transparent; border-color: rgba(255, 255, 255, .16); }
+    #contact .contact-social a:hover { border-color: rgba(255, 255, 255, .4); }
+    #contact .contact-social a img { filter: none; }
+    @media (max-width: 820px) { .about-body { gap: 32px; } .hero-stats { gap: 28px; margin-top: 40px; } }
+    @media (max-width: 640px) { section { padding: 72px 0; } .section-head { margin-bottom: 36px; } }
+
   </style>
 </head>
 
@@ -1502,10 +1569,9 @@
 
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/966511591846" target="_blank" rel="noopener" class="whatsapp-float" title="تواصل عبر الواتساب"
+  <a href="https://wa.me/966511591846" target="_blank" rel="noopener" class="whatsapp-float" data-i18n-attr="title:wa.title,aria-label:wa.title" title="تواصل عبر الواتساب"
     aria-label="تواصل عبر الواتساب">
-    <span class="whatsapp-tooltip">تواصل معي عبر الواتساب</span>
+    <span class="whatsapp-tooltip" data-i18n="wa.tip">تواصل معي عبر الواتساب</span>
     <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
       <path
         d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.002L2 22l5.126-1.343a9.96 9.96 0 004.882 1.272h.004c5.503 0 9.989-4.478 9.989-9.984 0-2.668-1.037-5.176-2.923-7.061A9.924 9.924 0 0012.012 2zm5.717 14.195c-.237.667-1.372 1.288-1.896 1.348-.485.056-1.116.08-1.802-.139-.415-.133-.949-.311-1.637-.61-2.902-1.258-4.802-4.183-4.948-4.377-.145-.194-1.189-1.583-1.189-3.02 0-1.436.75-2.143 1.017-2.435.267-.291.583-.364.777-.364.194 0 .388.001.558.009.182.008.424-.069.664.507.243.583.825 2.013.897 2.159.073.146.121.316.024.51-.097.194-.146.316-.291.485-.146.17-.306.38-.437.51-.146.146-.298.305-.128.597.17.291.754 1.246 1.62 2.018 1.113.992 2.052 1.301 2.343 1.446.291.146.461.122.631-.073.17-.194.729-.85.923-1.142.194-.291.388-.243.655-.146.267.097 1.699.801 1.99 9.47.291.146.485.219.558.34.073.121.073.704-.164 1.371z" />
@@ -1519,13 +1585,14 @@
         <span>ahdevloper</span>
       </a>
       <nav class="links" id="navLinks">
-        <a href="#about" data-nav>نبذة</a>
-        <a href="#skills" data-nav>المهارات</a>
-        <a href="#projects" data-nav>المشاريع</a>
-        <a href="#contact" data-nav>تواصل</a>
+        <a href="#about" data-nav data-i18n="nav.about">نبذة</a>
+        <a href="#skills" data-nav data-i18n="nav.skills">المهارات</a>
+        <a href="#projects" data-nav data-i18n="nav.projects">المشاريع</a>
+        <a href="#contact" data-nav data-i18n="nav.contact">تواصل</a>
       </nav>
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="تبديل الوضع"
+        <button class="lang-toggle" id="langToggle" type="button">EN</button>
+        <button class="theme-toggle" data-i18n-attr="aria-label:theme.label,title:theme.title" id="themeToggle" type="button" aria-label="تبديل الوضع"
           title="تبديل الوضع (نهاري / ليلي)">
           <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -1544,14 +1611,13 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         </button>
-        <a class="nav-cta" href="#projects">مشاهدة المشاريع</a>
+        <a class="nav-cta" href="#projects" data-i18n="nav.cta">مشاهدة المشاريع</a>
       </div>
     </div>
   </header>
 
   <main id="top">
 
-    <!-- HERO -->
     <section class="hero wrap">
       <div class="hero-grid">
         <div>
@@ -1559,65 +1625,61 @@
           <h1 class="hero-name hero-animate hero-animate-2">ahdevloper<span class="cursor" aria-hidden="true"></span>
           </h1>
           <div class="hero-role mono hero-animate hero-animate-3">Software Engineer &amp; Full-Stack Developer</div>
-          <p class="hero-desc hero-animate hero-animate-4">
+          <p class="hero-desc hero-animate hero-animate-4" data-i18n="hero.desc">
             مطور برمجيات أبني منصات ويب وأنظمة وتطبيقات وخدمات رقمية متكاملة —
             من تصميم قاعدة البيانات وواجهة البرمجة، إلى واجهة مستخدم سريعة ومتجاوبة.
           </p>
           <div class="hero-actions hero-animate hero-animate-5">
             <a href="#projects" class="btn btn-primary">
-              مشاهدة المشاريع
+              <span data-i18n="nav.cta">مشاهدة المشاريع</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="M7 17L17 7M7 7h10v10" />
               </svg>
             </a>
             <a href="./cv.pdf" download class="btn btn-ghost">
-              تحميل السيرة الذاتية
+              <span data-i18n="cv.btn">تحميل السيرة الذاتية</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" />
               </svg>
             </a>
           </div>
+          <div class="hero-stats hero-animate hero-animate-6" id="heroStats"></div>
         </div>
 
         <div class="hero-side hero-animate hero-animate-6">
           <div class="hero-avatar" title="ahdevloper">
             <img src="./ahdevloper-logo.png" alt="ahdevloper logo">
           </div>
-          <div class="social-row" aria-label="روابط التواصل الاجتماعي">
+          <div class="social-row" data-i18n-attr="aria-label:social.label" aria-label="روابط التواصل الاجتماعي">
             <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" title="Instagram — عبر Linktree"><img
-                src="https://cdn.simpleicons.org/instagram/0b0b0c" alt="Instagram" loading="lazy"></a>
+                src="https://cdn.simpleicons.org/instagram/171717" alt="Instagram" loading="lazy"></a>
             <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" title="TikTok — عبر Linktree"><img
-                src="https://cdn.simpleicons.org/tiktok/0b0b0c" alt="TikTok" loading="lazy"></a>
+                src="https://cdn.simpleicons.org/tiktok/171717" alt="TikTok" loading="lazy"></a>
             <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" title="YouTube — عبر Linktree"><img
-                src="https://cdn.simpleicons.org/youtube/0b0b0c" alt="YouTube" loading="lazy"></a>
+                src="https://cdn.simpleicons.org/youtube/171717" alt="YouTube" loading="lazy"></a>
             <a href="https://wa.me/966511591846" target="_blank" rel="noopener" title="WhatsApp — 0511591846"><img
-                src="https://cdn.simpleicons.org/whatsapp/0b0b0c" alt="WhatsApp" loading="lazy"></a>
+                src="https://cdn.simpleicons.org/whatsapp/171717" alt="WhatsApp" loading="lazy"></a>
           </div>
           <div class="hero-hint">scroll ↓</div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="section-divider">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow mono">$ about</div>
-          <h2 class="section-title">نبذة <span class="accent-dot">.</span></h2>
+          <h2 class="section-title" data-i18n-html="about.title">نبذة <span class="accent-dot">.</span></h2>
         </div>
         <div class="about-body">
           <div class="about-text reveal">
-            <p>
+            <p data-i18n="about.p1">
               مطور برمجيات متخصص في بناء المنصات والأنظمة والتطبيقات باستخدام تقنيات الويب الحديثة —
               من تصميم قواعد البيانات وواجهات البرمجة (APIs)، إلى بناء واجهات مستخدم سريعة ومتجاوبة.
             </p>
-            <p>
-              أعمل على تحويل الأفكار إلى منتجات رقمية متكاملة: منصات خاصة، متاجر إلكترونية، وأنظمة مخصّصة
-              لعملاء من قطاعات مختلفة.
-            </p>
-          </div>
+            </div>
           <div class="about-facts reveal">
             <div style="--stagger: 0;"><span>Role</span><span>Full-Stack Developer</span></div>
             <div style="--stagger: 1;"><span>Focus</span><span>Web Platforms &amp; Systems</span></div>
@@ -1628,134 +1690,62 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills" class="section-divider">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow mono">$ stack --list --categorized</div>
-          <h2 class="section-title">المهارات <span class="accent-dot">.</span></h2>
+          <h2 class="section-title" data-i18n-html="skills.title">المهارات <span class="accent-dot">.</span></h2>
         </div>
-        <div class="skills-categories">
-
-          <!-- 1. التطوير والبرمجة -->
-          <div class="skill-cat reveal">
-            <div class="skill-cat-label">التطوير والبرمجة</div>
-            <div class="skills-grid" id="skillsGrid-dev"></div>
+        <div class="skills-shell reveal">
+          <div class="skills-bar">
+            <div class="skills-tabs" id="skillsTabs" data-i18n-attr="aria-label:skills.tabs" role="tablist" aria-label="تصنيفات المهارات"></div>
+            <label class="skills-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+              <input type="search" id="skillsSearch" data-i18n-attr="placeholder:skills.search,aria-label:skills.search" placeholder="ابحث عن مهارة" aria-label="ابحث عن مهارة" autocomplete="off">
+            </label>
           </div>
-
-          <!-- 2. الأمن السيبراني -->
-          <div class="skill-cat reveal">
-            <div class="skill-cat-label">الأمن السيبراني</div>
-            <div class="skills-grid" id="skillsGrid-security"></div>
-          </div>
-
-          <!-- 3. التصميم وتجربة المستخدم -->
-          <div class="skill-cat reveal">
-            <div class="skill-cat-label">التصميم وتجربة المستخدم</div>
-            <div class="skills-grid" id="skillsGrid-design"></div>
-          </div>
-
-          <!-- 4. التسويق الرقمي -->
-          <div class="skill-cat reveal">
-            <div class="skill-cat-label">التسويق الرقمي</div>
-            <div class="skills-grid" id="skillsGrid-marketing"></div>
-          </div>
-
-          <!-- 5. الخدمات الرقمية وإدارة الأعمال -->
-          <div class="skill-cat reveal">
-            <div class="skill-cat-label">الخدمات الرقمية وإدارة الأعمال</div>
-            <div class="skills-grid" id="skillsGrid-business"></div>
-          </div>
-
+          <div class="skills-panel" id="skillsPanel" role="tabpanel" aria-live="polite"></div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects" class="section-divider">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow mono">$ ls ./projects</div>
-          <h2 class="section-title">المشاريع <span class="accent-dot">.</span></h2>
+          <h2 class="section-title" data-i18n-html="projects.title">المشاريع <span class="accent-dot">.</span></h2>
         </div>
 
-        <!-- منصاتي الخاصة -->
-        <div class="project-group reveal">
-          <div class="group-label">منصاتي الخاصة</div>
-          <div class="project-grid" id="grid-own"></div>
-        </div>
-
-        <!-- تطبيقات أندرويد -->
-        <div class="project-group reveal">
-          <div class="group-label">تطبيقات أندرويد</div>
-          <div class="project-grid" id="grid-app"></div>
-        </div>
-
-        <!-- المتاجر الإلكترونية -->
-        <div class="project-group reveal">
-          <div class="group-label">متاجر إلكترونية — سلة</div>
-          <div class="project-grid" id="grid-stores"></div>
-        </div>
-
-        <!-- مشاريع العملاء -->
-        <div class="project-group reveal">
-          <div class="group-label">مشاريع لعملاء</div>
-          <div class="project-grid" id="grid-clients"></div>
-        </div>
-
-        <!-- مشاريع مفتوحة المصدر — GitHub -->
-        <div class="project-group reveal">
-          <div class="group-label">مشاريع مفتوحة المصدر — GitHub</div>
-          <div class="project-grid" id="grid-github"></div>
-        </div>
-
-        <!-- السيرة الذاتية -->
-        <div class="cv-strip reveal" style="margin-top:64px;">
-          <div>
-            <h3>مهتم بمعرفة المزيد؟</h3>
-            <p>السيرة الذاتية تحتوي على تفاصيل إضافية عن الخبرة والمهارات.</p>
-          </div>
-
-          <a href="./cv.pdf" download class="btn btn-primary">
-            تحميل السيرة الذاتية
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" />
-            </svg>
-          </a>
-        </div>
-
-      </div>
+        <div class="skills-tabs proj-tabs" id="projectTabs" role="group"></div>
+        <div class="project-grid" id="projectGrid"></div>
+</div>
     </section>
 
-
-
-    <!-- CONTACT -->
     <section id="contact" class="section-divider">
       <div class="wrap contact-inner">
         <div class="eyebrow mono" style="justify-content:center;">$ contact --open</div>
-        <h2>لدي مشروع أو فكرة؟<br>دعنا نتحدث.</h2>
+        <h2 data-i18n-html="contact.title">لدي مشروع أو فكرة؟<br>دعنا نتحدث.</h2>
         <div class="contact-actions">
           <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" class="btn btn-primary">
-            تواصل معي
+            <span data-i18n="contact.btn1">تواصل معي</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
               <path d="M7 17L17 7M7 7h10v10" />
             </svg>
           </a>
-          <a href="https://www.enshir.com" target="_blank" rel="noopener" class="btn btn-ghost">مشروع إنشر</a>
+          <a href="./cv.pdf" download class="btn btn-ghost" data-i18n="contact.btn2">تحميل السيرة الذاتية</a>
         </div>
         <div class="contact-social">
           <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" title="Instagram"><img
-              src="https://cdn.simpleicons.org/instagram/6b6a64" alt="Instagram" width="18" height="18"></a>
+              src="https://cdn.simpleicons.org/instagram/888888" alt="Instagram" width="18" height="18"></a>
           <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" title="TikTok"><img
-              src="https://cdn.simpleicons.org/tiktok/6b6a64" alt="TikTok" width="18" height="18"></a>
+              src="https://cdn.simpleicons.org/tiktok/888888" alt="TikTok" width="18" height="18"></a>
           <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener" title="YouTube"><img
-              src="https://cdn.simpleicons.org/youtube/6b6a64" alt="YouTube" width="18" height="18"></a>
+              src="https://cdn.simpleicons.org/youtube/888888" alt="YouTube" width="18" height="18"></a>
           <a href="https://wa.me/966511591846" target="_blank" rel="noopener" title="WhatsApp — 0511591846"><img
-              src="https://cdn.simpleicons.org/whatsapp/6b6a64" alt="WhatsApp" width="18" height="18"></a>
+              src="https://cdn.simpleicons.org/whatsapp/888888" alt="WhatsApp" width="18" height="18"></a>
           <a href="https://ahmed-yasein.blogspot.com" target="_blank" rel="noopener" title="المدونة"><img
-              src="https://cdn.simpleicons.org/blogger/6b6a64" alt="Blog" width="18" height="18"></a>
+              src="https://cdn.simpleicons.org/blogger/888888" alt="Blog" width="18" height="18"></a>
         </div>
       </div>
     </section>
@@ -1764,7 +1754,7 @@
 
   <footer>
     <div class="wrap footer-inner">
-      <span>© 2026 ahdevloper. جميع الحقوق محفوظة.</span>
+      <span data-i18n="footer.copy">© 2026 ahdevloper. جميع الحقوق محفوظة.</span>
       <div class="footer-links">
         <a href="https://www.enshir.com" target="_blank" rel="noopener">Enshir</a>
         <a href="https://linktr.ee/ahdevloper" target="_blank" rel="noopener">Linktree</a>
@@ -1775,9 +1765,7 @@
   </footer>
 
   <script>
-    // ---------- Data ----------
 
-    // === Tech skills with SimpleIcons slugs ===
     const skillsDev = [
       ["php", "PHP"],
       ["laravel", "Laravel"],
@@ -1805,47 +1793,46 @@
       ["github", "GitHub"],
     ];
 
-    // === Text-only skill sets (no icon) ===
     const skillsSecurity = [
-      "أساسيات الأمن السيبراني",
-      "أمن تطبيقات الويب",
-      "أمن البرمجيات",
-      "تحليل الثغرات",
-      "اختبار أمان التطبيقات في بيئات مصرح بها",
-      "أساسيات الشبكات والأمن",
-      "حماية الحسابات والأنظمة",
-      "تحليل المشكلات الأمنية",
-      "الوعي الأمني",
+      ["أساسيات الأمن السيبراني", "Cybersecurity fundamentals"],
+      ["أمن تطبيقات الويب", "Web application security"],
+      ["أمن البرمجيات", "Software security"],
+      ["تحليل الثغرات", "Vulnerability analysis"],
+      ["اختبار أمان التطبيقات في بيئات مصرح بها", "Authorized application security testing"],
+      ["أساسيات الشبكات والأمن", "Networking & security basics"],
+      ["حماية الحسابات والأنظمة", "Account & system protection"],
+      ["تحليل المشكلات الأمنية", "Security issue analysis"],
+      ["الوعي الأمني", "Security awareness"],
     ];
 
     const skillsDesign = [
-      "تصميم واجهات المستخدم (UI)",
-      "تجربة المستخدم (UX)",
-      "تصميم واجهات المواقع",
-      "تصميم المتاجر الإلكترونية",
-      "Responsive Design",
-      "تصميم الواجهات الرقمية",
-      "تنسيق الهوية البصرية",
+      ["تصميم واجهات المستخدم (UI)", "User interface (UI) design"],
+      ["تجربة المستخدم (UX)", "User experience (UX)"],
+      ["تصميم واجهات المواقع", "Website interface design"],
+      ["تصميم المتاجر الإلكترونية", "Online store design"],
+      ["Responsive Design", "Responsive Design"],
+      ["تصميم الواجهات الرقمية", "Digital interface design"],
+      ["تنسيق الهوية البصرية", "Visual identity styling"],
     ];
 
     const skillsMarketing = [
-      "التسويق الإلكتروني",
-      "تحسين محركات البحث (SEO)",
-      "إدارة الحملات الإعلانية",
-      "إدارة المحتوى",
-      "التسويق عبر منصات التواصل",
-      "إدارة المتاجر الإلكترونية",
-      "تحليل أداء الحملات",
+      ["التسويق الإلكتروني", "Digital marketing"],
+      ["تحسين محركات البحث (SEO)", "Search engine optimization (SEO)"],
+      ["إدارة الحملات الإعلانية", "Ad campaign management"],
+      ["إدارة المحتوى", "Content management"],
+      ["التسويق عبر منصات التواصل", "Social media marketing"],
+      ["إدارة المتاجر الإلكترونية", "Online store management"],
+      ["تحليل أداء الحملات", "Campaign performance analysis"],
     ];
 
     const skillsBusiness = [
-      "التعامل مع المنصات الحكومية الإلكترونية",
-      "إدارة الخدمات الإلكترونية للمنشآت",
-      "متابعة الإجراءات الحكومية الرقمية",
-      "إدارة بيانات الموظفين",
-      "إدارة الموارد البشرية",
-      "متابعة خدمات الموظفين",
-      "إدارة المنشآت إلكترونيًا",
+      ["التعامل مع المنصات الحكومية الإلكترونية", "Government e-platforms"],
+      ["إدارة الخدمات الإلكترونية للمنشآت", "Business e-services management"],
+      ["متابعة الإجراءات الحكومية الرقمية", "Digital government procedures follow-up"],
+      ["إدارة بيانات الموظفين", "Employee data management"],
+      ["إدارة الموارد البشرية", "HR management"],
+      ["متابعة خدمات الموظفين", "Employee services follow-up"],
+      ["إدارة المنشآت إلكترونيًا", "Digital business administration"],
     ];
 
     const iconGlobe = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1895,92 +1882,289 @@
   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
 </svg>`;
 
-    // === Projects ===
+    const P = (url, icon, ar, en) => ({ url, icon, ar: { name: ar[0], type: ar[1], desc: ar[2] }, en: { name: en[0], type: en[1], desc: en[2] } });
+
     const ownProjects = [
-      { name: "منصة إنشر — Enshir", type: "منصة ويب", desc: "منصة إعلانات متنوعة تجمع بين البائعين والمشترين، مع خدمات مرتبطة بالوظائف والإعلانات وإدارة المحتوى.", url: "https://www.enshir.com", icon: iconGlobe },
-      { name: "نظام حجز الباصات — Busyemen", type: "منصة ويب", desc: "نظام لحجز رحلات الباصات إلكترونيًا.", url: "https://busyemen.enshir.com", icon: iconGlobe },
-      { name: "المدونة الشخصية", type: "مدونة", desc: "مدونة شخصية لكتابة ومشاركة المحتوى.", url: "https://ahmed-yasein.blogspot.com", icon: iconCode },
+      P("https://www.enshir.com", iconGlobe,
+        ["منصة إنشر — Enshir", "منصة ويب", "منصة إعلانات متنوعة تجمع بين البائعين والمشترين، مع خدمات مرتبطة بالوظائف والإعلانات وإدارة المحتوى."],
+        ["Enshir Platform", "Web platform", "A classifieds platform connecting buyers and sellers, with job listings, ads and content management."]),
+      P("https://busyemen.enshir.com", iconGlobe,
+        ["نظام حجز الباصات — Busyemen", "منصة ويب", "نظام لحجز رحلات الباصات إلكترونيًا."],
+        ["Busyemen — Bus Booking", "Web platform", "An online system for booking bus trips."]),
+      P("https://ahmed-yasein.blogspot.com", iconCode,
+        ["المدونة الشخصية", "مدونة", "مدونة شخصية لكتابة ومشاركة المحتوى."],
+        ["Personal blog", "Blog", "A personal blog for writing and sharing content."]),
     ];
 
     const appProjects = [
-      { name: "ScamShield", type: "تطبيق أندرويد", desc: "تطبيق للإبلاغ عن أرقام الاحتيال والمستخدمين المشبوهين والتحقق من البلاغات.", url: "#", icon: iconShield },
-      { name: "المكتبة الإسلامية", type: "تطبيق أندرويد", desc: "تطبيق إسلامي يوفر مكتبة شاملة من المحتوى والمصادر الدينية في مكان واحد.", url: "#", icon: iconBook },
-      { name: "لعبة توصيل الطلبات", type: "لعبة أندرويد", desc: "لعبة سيارات تعتمد على قيادة المركبات وتنفيذ مهام توصيل الطلبات إلى الوجهات المحددة.", url: "#", icon: iconGame },
-      { name: "معلومات الجهاز", type: "تطبيق أندرويد", desc: "تطبيق لعرض معلومات الجهاز ومواصفات النظام والمكونات والبيانات التقنية المتاحة.", url: "#", icon: iconMobile },
+      P("#", iconShield,
+        ["ScamShield", "تطبيق أندرويد", "تطبيق للإبلاغ عن أرقام الاحتيال والمستخدمين المشبوهين والتحقق من البلاغات."],
+        ["ScamShield", "Android app", "An app for reporting scam numbers and suspicious users, and verifying reports."]),
+      P("#", iconBook,
+        ["المكتبة الإسلامية", "تطبيق أندرويد", "تطبيق إسلامي يوفر مكتبة شاملة من المحتوى والمصادر الدينية في مكان واحد."],
+        ["Islamic Library", "Android app", "An Islamic app offering a comprehensive library of religious content and sources in one place."]),
+      P("#", iconGame,
+        ["لعبة توصيل الطلبات", "لعبة أندرويد", "لعبة سيارات تعتمد على قيادة المركبات وتنفيذ مهام توصيل الطلبات إلى الوجهات المحددة."],
+        ["Delivery Missions Game", "Android game", "A driving game where you drive vehicles and complete order delivery missions to set destinations."]),
+      P("#", iconMobile,
+        ["معلومات الجهاز", "تطبيق أندرويد", "تطبيق لعرض معلومات الجهاز ومواصفات النظام والمكونات والبيانات التقنية المتاحة."],
+        ["Device Info", "Android app", "An app that shows device information, system specs, components and available technical data."]),
     ];
 
     const storeProjects = [
-      { name: "لوت", type: "متجر إلكتروني", desc: "متجر سوبر ماركت إلكتروني مبني على منصة سلة.", url: "https://sa-loots.com", icon: iconBag },
-      { name: "Evrio", type: "متجر إلكتروني", desc: "متجر إلكترونيات مبني على منصة سلة.", url: "https://salla.sa/evrio-2026", icon: iconBag },
-      { name: "سلطان للإلكترونيات", type: "متجر إلكتروني", desc: "متجر إلكترونيات مبني على منصة سلة.", url: "https://salla.sa/sultanelectronite", icon: iconBag },
+      P("https://sa-loots.com", iconBag,
+        ["لوت", "متجر إلكتروني", "متجر سوبر ماركت إلكتروني مبني على منصة سلة."],
+        ["Loot", "Online store", "An online supermarket built on Salla."]),
+      P("https://salla.sa/evrio-2026", iconBag,
+        ["Evrio", "متجر إلكتروني", "متجر إلكترونيات مبني على منصة سلة."],
+        ["Evrio", "Online store", "An electronics store built on Salla."]),
+      P("https://salla.sa/sultanelectronite", iconBag,
+        ["سلطان للإلكترونيات", "متجر إلكتروني", "متجر إلكترونيات مبني على منصة سلة."],
+        ["Sultan Electronics", "Online store", "An electronics store built on Salla."]),
     ];
 
     const clientProjects = [
-      { name: "كلاسيكو للكورة", type: "موقع ويب لعميل", desc: "موقع متخصص بمحتوى كرة القدم.", url: "https://clasicofootball.enshir.com/", icon: iconGlobe },
-      { name: "WAQAR EVENT", type: "موقع ويب لعميل", desc: "موقع لتنظيم المعارض والمؤتمرات والفعاليات.", url: "https://waqarevent.com", icon: iconGlobe },
-      { name: "سكان نجد", type: "موقع ويب لعميل", desc: "موقع لشركة متخصصة بالمسابح والأبواب.", url: "https://skannjd.com", icon: iconGlobe },
-      { name: "نوتكالز للأثاث", type: "موقع ويب لعميل", desc: "موقع لشركة أثاث.", url: "https://notkalz.enshir.com", icon: iconGlobe },
-      { name: "Neomakar Real Estate", type: "موقع ويب لعميل", desc: "موقع عقاري.", url: "https://neomakar.enshir.com", icon: iconGlobe },
-      { name: "Lady Beauty", type: "متجر إلكتروني", desc: "متجر تجميل مبني على منصة سلة.", url: "https://salla.sa/lady-beauty-2030", icon: iconBag },
-      { name: "متجر الجمال", type: "متجر إلكتروني", desc: "متجر أدوات زينة وعناية.", url: "https://eternalvows.enshir.com", icon: iconBag },
-      { name: "custio", type: "موقع ويب لعميل", desc: "مشروع ويب لعميل.", url: "https://custio.wuaze.com", icon: iconGlobe },
-      { name: "asasinfo", type: "موقع ويب لعميل", desc: "مشروع ويب لعميل.", url: "https://asasinfo.kesug.com", icon: iconGlobe },
+      P("https://clasicofootball.enshir.com/", iconGlobe,
+        ["كلاسيكو للكورة", "موقع ويب لعميل", "موقع متخصص بمحتوى كرة القدم."],
+        ["Clasico Football", "Client website", "A website focused on football content."]),
+      P("https://waqarevent.com", iconGlobe,
+        ["WAQAR EVENT", "موقع ويب لعميل", "موقع لتنظيم المعارض والمؤتمرات والفعاليات."],
+        ["WAQAR EVENT", "Client website", "A website for organizing exhibitions, conferences and events."]),
+      P("https://skannjd.com", iconGlobe,
+        ["سكان نجد", "موقع ويب لعميل", "موقع لشركة متخصصة بالمسابح والأبواب."],
+        ["Skan Najd", "Client website", "A website for a company specialized in pools and doors."]),
+      P("https://notkalz.enshir.com", iconGlobe,
+        ["نوتكالز للأثاث", "موقع ويب لعميل", "موقع لشركة أثاث."],
+        ["Notkalz Furniture", "Client website", "A website for a furniture company."]),
+      P("https://neomakar.enshir.com", iconGlobe,
+        ["Neomakar Real Estate", "موقع ويب لعميل", "موقع عقاري."],
+        ["Neomakar Real Estate", "Client website", "A real estate website."]),
+      P("https://salla.sa/lady-beauty-2030", iconBag,
+        ["Lady Beauty", "متجر إلكتروني", "متجر تجميل مبني على منصة سلة."],
+        ["Lady Beauty", "Online store", "A beauty store built on Salla."]),
+      P("https://eternalvows.enshir.com", iconBag,
+        ["متجر الجمال", "متجر إلكتروني", "متجر أدوات زينة وعناية."],
+        ["Beauty Store", "Online store", "A store for cosmetics and personal care products."]),
+      P("https://custio.wuaze.com", iconGlobe,
+        ["custio", "موقع ويب لعميل", "مشروع ويب لعميل."],
+        ["custio", "Client website", "A web project for a client."]),
+      P("https://asasinfo.kesug.com", iconGlobe,
+        ["asasinfo", "موقع ويب لعميل", "مشروع ويب لعميل."],
+        ["asasinfo", "Client website", "A web project for a client."]),
     ];
 
     const githubProjects = [
-      { name: "ScamShield Android", type: "مفتوح المصدر", desc: "مشروع ScamShield — تطبيق أندرويد للإبلاغ عن أرقام الاحتيال والمستخدمين المشبوهين.", url: "https://github.com/ahdevloper", icon: iconGithub },
-      { name: "Islamic Library App", type: "مفتوح المصدر", desc: "تطبيق المكتبة الإسلامية — مشروع أندرويد مفتوح المصدر.", url: "https://github.com/ahdevloper", icon: iconGithub },
-      { name: "Enshir Platform", type: "مفتوح المصدر", desc: "بعض مكونات منصة إنشر متاحة على GitHub.", url: "https://github.com/ahdevloper", icon: iconGithub },
+      P("https://github.com/ahdevloper", iconGithub,
+        ["ScamShield Android", "مفتوح المصدر", "مشروع ScamShield — تطبيق أندرويد للإبلاغ عن أرقام الاحتيال والمستخدمين المشبوهين."],
+        ["ScamShield Android", "Open source", "The ScamShield project — an Android app for reporting scam numbers and suspicious users."]),
+      P("https://github.com/ahdevloper", iconGithub,
+        ["Islamic Library App", "مفتوح المصدر", "تطبيق المكتبة الإسلامية — مشروع أندرويد مفتوح المصدر."],
+        ["Islamic Library App", "Open source", "The Islamic Library app — an open-source Android project."]),
+      P("https://github.com/ahdevloper", iconGithub,
+        ["Enshir Platform", "مفتوح المصدر", "بعض مكونات منصة إنشر متاحة على GitHub."],
+        ["Enshir Platform", "Open source", "Some components of the Enshir platform are available on GitHub."]),
     ];
 
-    // === Renderers ===
     function projectCard(p, index = 0) {
+      const d = p[lang];
       return `
-    <div class="project-card reveal" style="--stagger: ${index % 6};">
+    <div class="project-card" style="--stagger: ${index % 9};">
       <div class="project-visual">
         <div class="project-mono-icon">${p.icon}</div>
       </div>
       <div class="project-body">
-        <span class="project-type mono">${p.type}</span>
-        <h3 class="project-name">${p.name}</h3>
-        <p class="project-desc">${p.desc}</p>
+        <span class="project-type mono">${d.type}</span>
+        <h3 class="project-name">${d.name}</h3>
+        <p class="project-desc">${d.desc}</p>
         <a href="${p.url}" target="_blank" rel="noopener" class="project-link">
-          زيارة المشروع ${iconExternal}
+          ${t("project.visit")} ${iconExternal}
         </a>
       </div>
     </div>`;
     }
 
-    function iconChip(slug, label, i) {
-      return `<div class="skill-chip reveal" style="--stagger: ${i % 8};">
-      <img src="https://cdn.simpleicons.org/${slug}" alt="${label}" loading="lazy">
-      <span>${label}</span>
-    </div>`;
+    const projectTabs = document.getElementById("projectTabs");
+    const projectGrid = document.getElementById("projectGrid");
+    const projectGroups = [
+      { k: "g.own", items: ownProjects }, { k: "g.app", items: appProjects }, { k: "g.stores", items: storeProjects },
+      { k: "g.clients", items: clientProjects }, { k: "g.github", items: githubProjects },
+    ];
+    let activeProject = 0;
+
+    function renderProjectTabs() {
+      projectTabs.innerHTML = projectGroups.map((g, i) =>
+        `<button type="button" class="skills-tab" aria-pressed="${i === activeProject}" data-i="${i}">${t(g.k)}<span class="count">${g.items.length}</span></button>`
+      ).join("");
     }
 
-    function textChip(label, i) {
-      return `<div class="skill-chip text-chip reveal" style="--stagger: ${i % 8};">
-      <span class="chip-dot"></span>
-      <span>${label}</span>
-    </div>`;
+    function renderProjects() {
+      projectGrid.innerHTML = projectGroups[activeProject].items.map((p, i) => projectCard(p, i)).join("");
     }
 
-    // Render skills
-    document.getElementById("skillsGrid-dev").innerHTML = skillsDev.map(([s, l], i) => iconChip(s, l, i)).join("");
-    document.getElementById("skillsGrid-security").innerHTML = skillsSecurity.map((l, i) => textChip(l, i)).join("");
-    document.getElementById("skillsGrid-design").innerHTML = skillsDesign.map((l, i) => textChip(l, i)).join("");
-    document.getElementById("skillsGrid-marketing").innerHTML = skillsMarketing.map((l, i) => textChip(l, i)).join("");
-    document.getElementById("skillsGrid-business").innerHTML = skillsBusiness.map((l, i) => textChip(l, i)).join("");
+    projectTabs.addEventListener("click", (e) => {
+      const b = e.target.closest(".skills-tab");
+      if (!b) return;
+      activeProject = +b.dataset.i;
+      renderProjectTabs();
+      renderProjects();
+      projectTabs.children[activeProject].focus();
+    });
 
-    // Render projects
-    document.getElementById("grid-own").innerHTML = ownProjects.map((p, i) => projectCard(p, i)).join("");
-    document.getElementById("grid-app").innerHTML = appProjects.map((p, i) => projectCard(p, i)).join("");
-    document.getElementById("grid-stores").innerHTML = storeProjects.map((p, i) => projectCard(p, i)).join("");
-    document.getElementById("grid-clients").innerHTML = clientProjects.map((p, i) => projectCard(p, i)).join("");
-    document.getElementById("grid-github").innerHTML = githubProjects.map((p, i) => projectCard(p, i)).join("");
+    function renderStats() {
+      const n = ownProjects.length + appProjects.length + storeProjects.length + clientProjects.length;
+      const items = [[n, "stat.projects"], [skillsDev.length, "stat.tech"], [skillGroups.length, "stat.fields"]];
+      document.getElementById("heroStats").innerHTML = items.map(([v, k]) => `<div><strong>${v}</strong><span>${t(k)}</span></div>`).join("");
+    }
 
+    const skillGroups = [
+      { id: "dev", short: { ar: "التطوير", en: "Development" }, items: skillsDev.map(([slug, label]) => ({ ar: label, en: label, slug })) },
+      { id: "security", short: { ar: "الأمن السيبراني", en: "Cybersecurity" }, items: skillsSecurity.map(([ar, en]) => ({ ar, en })) },
+      { id: "design", short: { ar: "التصميم وUX", en: "Design & UX" }, items: skillsDesign.map(([ar, en]) => ({ ar, en })) },
+      { id: "marketing", short: { ar: "التسويق الرقمي", en: "Digital marketing" }, items: skillsMarketing.map(([ar, en]) => ({ ar, en })) },
+      { id: "business", short: { ar: "الخدمات والأعمال", en: "Services & business" }, items: skillsBusiness.map(([ar, en]) => ({ ar, en })) },
+    ];
 
-    // ---------- Scroll Progress Indicator ----------
+    const skillsTabs = document.getElementById("skillsTabs");
+    const skillsPanel = document.getElementById("skillsPanel");
+    const skillsSearch = document.getElementById("skillsSearch");
+    let activeSkillGroup = 0;
+
+    function skillChip(item, i, tag) {
+      const lead = item.slug
+        ? `<img src="https://cdn.simpleicons.org/${item.slug}" alt="" width="16" height="16" loading="lazy">`
+        : `<span class="chip-dot"></span>`;
+      return `<div class="skill-chip${item.slug ? "" : " text-chip"}" style="--i:${i}">${lead}<span>${item[lang]}</span>${tag ? `<small class="chip-cat">${tag}</small>` : ""}</div>`;
+    }
+
+    function renderSkills() {
+      const q = skillsSearch.value.trim().toLowerCase();
+      skillsTabs.querySelectorAll(".skills-tab").forEach((tab, i) => {
+        const on = !q && i === activeSkillGroup;
+        tab.setAttribute("aria-selected", on);
+        tab.tabIndex = i === activeSkillGroup ? 0 : -1;
+      });
+      let html;
+      if (q) {
+        const hits = skillGroups.flatMap(g => g.items.filter(it => (it.ar + " " + it.en).toLowerCase().includes(q)).map(it => ({ it, tag: g.short[lang] })));
+        html = hits.length ? hits.map((h, i) => skillChip(h.it, i, h.tag)).join("") : `<div class="skills-empty">${t("skills.empty")}</div>`;
+      } else {
+        const g = skillGroups[activeSkillGroup];
+        html = g.items.map((it, i) => skillChip(it, i)).join("");
+        skillsPanel.setAttribute("aria-labelledby", "skill-tab-" + g.id);
+      }
+      skillsPanel.innerHTML = html;
+    }
+
+    function renderSkillTabs() {
+      skillsTabs.innerHTML = skillGroups.map((g, i) =>
+        `<button type="button" class="skills-tab" role="tab" id="skill-tab-${g.id}" data-i="${i}">${g.short[lang]}<span class="count">${g.items.length}</span></button>`
+      ).join("");
+    }
+
+    skillsTabs.addEventListener("click", (e) => {
+      const tab = e.target.closest(".skills-tab");
+      if (!tab) return;
+      activeSkillGroup = +tab.dataset.i;
+      skillsSearch.value = "";
+      renderSkills();
+    });
+
+    skillsTabs.addEventListener("keydown", (e) => {
+      const last = skillGroups.length - 1;
+      let next = null;
+      if (e.key === "ArrowLeft") next = activeSkillGroup === last ? 0 : activeSkillGroup + 1;
+      else if (e.key === "ArrowRight") next = activeSkillGroup === 0 ? last : activeSkillGroup - 1;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = last;
+      if (next === null) return;
+      e.preventDefault();
+      activeSkillGroup = next;
+      skillsSearch.value = "";
+      renderSkills();
+      skillsTabs.children[next].focus();
+    });
+
+    skillsSearch.addEventListener("input", renderSkills);
+
+    const i18n = {
+      ar: {
+        "nav.about": "نبذة", "nav.skills": "المهارات", "nav.projects": "المشاريع", "nav.contact": "تواصل",
+        "nav.cta": "مشاهدة المشاريع",
+        "theme.label": "تبديل الوضع", "theme.title": "تبديل الوضع (نهاري / ليلي)",
+        "wa.title": "تواصل عبر الواتساب", "wa.tip": "تواصل معي عبر الواتساب",
+        "hero.desc": "مطور برمجيات أبني منصات ويب وأنظمة وتطبيقات وخدمات رقمية متكاملة — من تصميم قاعدة البيانات وواجهة البرمجة، إلى واجهة مستخدم سريعة ومتجاوبة.",
+        "social.label": "روابط التواصل الاجتماعي",
+        "about.title": "نبذة <span class=\"accent-dot\">.</span>",
+        "about.p1": "مطور برمجيات متخصص في بناء المنصات والأنظمة والتطبيقات باستخدام تقنيات الويب الحديثة — من تصميم قواعد البيانات وواجهات البرمجة (APIs)، إلى بناء واجهات مستخدم سريعة ومتجاوبة.",
+        "skills.title": "المهارات <span class=\"accent-dot\">.</span>",
+        "skills.search": "ابحث عن مهارة", "skills.tabs": "تصنيفات المهارات", "skills.empty": "لا توجد مهارة مطابقة",
+        "projects.title": "المشاريع <span class=\"accent-dot\">.</span>",
+        "g.own": "منصاتي الخاصة", "g.app": "تطبيقات أندرويد", "g.stores": "متاجر إلكترونية — سلة",
+        "g.clients": "مشاريع لعملاء", "g.github": "مشاريع مفتوحة المصدر — GitHub",
+        "project.visit": "زيارة المشروع",
+        "cv.btn": "تحميل السيرة الذاتية",
+        "contact.title": "لدي مشروع أو فكرة؟<br>دعنا نتحدث.", "contact.btn1": "تواصل معي", "contact.btn2": "تحميل السيرة الذاتية",
+        "footer.copy": "© 2026 ahdevloper. جميع الحقوق محفوظة.",
+        "stat.projects": "مشروع", "stat.tech": "تقنية", "stat.fields": "مجالات خبرة",
+        "lang.next": "EN", "lang.label": "Switch to English",
+        "meta.desc": "ahdevloper — مهندس برمجيات ومطور Full-Stack. أبني منصات ويب، أنظمة، تطبيقات وخدمات رقمية."
+      },
+      en: {
+        "nav.about": "About", "nav.skills": "Skills", "nav.projects": "Projects", "nav.contact": "Contact",
+        "nav.cta": "View projects",
+        "theme.label": "Toggle theme", "theme.title": "Toggle theme (light / dark)",
+        "wa.title": "Chat on WhatsApp", "wa.tip": "Message me on WhatsApp",
+        "hero.desc": "A software developer building web platforms, systems, apps and complete digital services — from database and API design to fast, responsive user interfaces.",
+        "social.label": "Social links",
+        "about.title": "About <span class=\"accent-dot\">.</span>",
+        "about.p1": "A software developer specialized in building platforms, systems and apps with modern web technologies — from database and API design to fast, responsive user interfaces.",
+        "skills.title": "Skills <span class=\"accent-dot\">.</span>",
+        "skills.search": "Search skills", "skills.tabs": "Skill categories", "skills.empty": "No matching skills",
+        "projects.title": "Projects <span class=\"accent-dot\">.</span>",
+        "g.own": "My platforms", "g.app": "Android apps", "g.stores": "Online stores — Salla",
+        "g.clients": "Client projects", "g.github": "Open source — GitHub",
+        "project.visit": "Visit project",
+        "cv.btn": "Download CV",
+        "contact.title": "Have a project or an idea?<br>Let's talk.", "contact.btn1": "Contact me", "contact.btn2": "Download CV",
+        "footer.copy": "© 2026 ahdevloper. All rights reserved.",
+        "stat.projects": "Projects", "stat.tech": "Technologies", "stat.fields": "Areas of expertise",
+        "lang.next": "عربي", "lang.label": "التبديل إلى العربية",
+        "meta.desc": "ahdevloper — Software engineer and full-stack developer. I build web platforms, systems, apps and digital services."
+      }
+    };
+
+    let lang = document.documentElement.lang === "en" ? "en" : "ar";
+    const t = (key) => i18n[lang][key];
+    const langToggle = document.getElementById("langToggle");
+
+    function applyLang(next, persist) {
+      lang = next;
+      const root = document.documentElement;
+      root.lang = lang;
+      root.dir = lang === "ar" ? "rtl" : "ltr";
+      if (persist) { try { localStorage.setItem("lang", lang); } catch (e) { } }
+      document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+      document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+      document.querySelectorAll("[data-i18n-attr]").forEach(el => {
+        el.dataset.i18nAttr.split(",").forEach(pair => {
+          const [attr, key] = pair.split(":");
+          el.setAttribute(attr, t(key));
+        });
+      });
+      document.querySelector('meta[name="description"]').setAttribute("content", t("meta.desc"));
+      langToggle.textContent = t("lang.next");
+      langToggle.setAttribute("aria-label", t("lang.label"));
+      langToggle.title = t("lang.label");
+      renderSkillTabs();
+      renderSkills();
+      renderProjectTabs();
+      renderProjects();
+      renderStats();
+    }
+
+    langToggle.addEventListener("click", () => applyLang(lang === "ar" ? "en" : "ar", true));
+    applyLang(lang, false);
+
     const scrollProgress = document.getElementById("scrollProgress");
     function updateScrollProgress() {
       if (!scrollProgress) return;
@@ -1993,13 +2177,11 @@
     window.addEventListener("scroll", updateScrollProgress, { passive: true });
     updateScrollProgress();
 
-    // ---------- Nav scroll state ----------
     const nav = document.getElementById("siteNav");
     window.addEventListener("scroll", () => {
       nav.classList.toggle("scrolled", window.scrollY > 10);
     }, { passive: true });
 
-    // ---------- Theme Toggle Handler ----------
     const themeToggleBtn = document.getElementById("themeToggle");
     if (themeToggleBtn) {
       themeToggleBtn.addEventListener("click", () => {
@@ -2010,34 +2192,12 @@
       });
     }
 
-    // System theme change listener (only if user hasn't set explicit choice)
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
       if (!localStorage.getItem("theme")) {
         document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
       }
     });
 
-    // ---------- Subtle 3D Card Tilt (Desktop fine pointer) ----------
-    if (window.matchMedia("(pointer: fine)").matches) {
-      document.querySelectorAll(".project-card").forEach(card => {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -3.5;
-          const rotateY = ((x - centerX) / centerX) * 3.5;
-          card.style.transform = `perspective(1000px) translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "";
-        });
-      });
-    }
-
-    // ---------- Active link + reveal ----------
     const sections = document.querySelectorAll("section[id]");
     const navLinksEls = document.querySelectorAll("[data-nav]");
     const revealEls = document.querySelectorAll(".reveal");
